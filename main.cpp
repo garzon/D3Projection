@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
     fclose(f);
     */
 
-    Camera cam(13, 90, 90, 700, 700);
+    Camera cam(90, 90, 700, 700);
 
     x=y=z=theta=phi=0;
 

@@ -2,9 +2,9 @@
 
 using namespace d3Projection;
 
-Camera::Camera(double focalLength, double _FOVX, double _FOVY, int _pixelsX, int _pixelsY) :
+Camera::Camera(double _FOVX, double _FOVY, int _pixelsX, int _pixelsY) :
     hasOrbit(false),
-    checkAng(false), checkPos(false), focalLen(focalLength),
+    checkAng(false), checkPos(false),
     pixelsX(_pixelsX), pixelsY(_pixelsY), FOVX(_FOVX), FOVY(_FOVY)
 {
     FOVX = FOVX / 360.0 * CV_PI;
@@ -33,17 +33,15 @@ void Camera::setAngle(double _theta, double _phi) {
     focalVec[0] = -cosTheta * cosPhi;
     focalVec[1] = -sinTheta * cosPhi;
     focalVec[2] = -sinPhi;
-    focalVec = focalVec * focalLen;
-
     baseX[0] = -sinTheta;
     baseX[1] = cosTheta;
     baseX[2] = 0;
-    baseX = baseX * focalLen * tan(FOVX);
+    baseX = baseX * tan(FOVX);
 
     baseY[0] = -cosTheta * sinPhi;
     baseY[1] = -sinTheta  * sinPhi;
     baseY[2] = cosPhi;
-    baseY = baseY * focalLen * tan(FOVY);
+    baseY = baseY * tan(FOVY);
 
     checkAng = true;
 }
@@ -95,7 +93,7 @@ inline cv::Vec3d Camera::projectPoint(const cv::Vec3d &point) {
     cv::Vec3d ret;
     ret[0] = (data[0]+1) * 0.5 * pixelsX;
     ret[1] = (data[1]+1) * 0.5 * pixelsY;
-    ret[2] = focalLen / data[2];
+    ret[2] = 1 / data[2];
     return ret;
 }
 
