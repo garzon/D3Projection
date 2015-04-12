@@ -6,7 +6,10 @@ Camera::Camera(double focalLength, double _FOVX, double _FOVY, int _pixelsX, int
     hasOrbit(false),
     checkAng(false), checkPos(false), focalLen(focalLength),
     pixelsX(_pixelsX), pixelsY(_pixelsY), FOVX(_FOVX), FOVY(_FOVY)
-{}
+{
+    FOVX = FOVX / 360.0 * CV_PI;
+    FOVY = FOVY / 360.0 * CV_PI;
+}
 
 void Camera::setPosition(const cv::Vec3d &_pos) {
     pos = _pos;
@@ -35,12 +38,12 @@ void Camera::setAngle(double _theta, double _phi) {
     baseX[0] = -sinTheta;
     baseX[1] = cosTheta;
     baseX[2] = 0;
-    baseX = -baseX * focalLen * tan(FOVX);
+    baseX = baseX * focalLen * tan(FOVX);
 
     baseY[0] = -cosTheta * sinPhi;
     baseY[1] = -sinTheta  * sinPhi;
     baseY[2] = cosPhi;
-    baseY = -baseY * focalLen * tan(FOVY);
+    baseY = baseY * focalLen * tan(FOVY);
 
     checkAng = true;
 }
