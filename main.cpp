@@ -28,16 +28,16 @@ int main(int argc, char **argv) {
     scene.addObject(&s4);
 
 
-
+    /*
     FILE *f = fopen("/home/garzon/xyz.txt", "r");
     while(fscanf(f, "%lf %lf %lf", &x, &y, &z) > 0) {
         SphereObject *tmp = new SphereObject (Vec<double, 3>(x, y, z), 0.01, Scalar(255, 255, 255));
         scene.addObject(tmp);
     }
     fclose(f);
+    */
 
-
-    Camera cam(13, 150, 150, 700, 700);
+    Camera cam(13, 90, 90, 700, 700);
 
     x=y=z=theta=phi=0;
 
@@ -57,20 +57,20 @@ int main(int argc, char **argv) {
     };
 
     // orbit 1
-    /*
+
     cam.setOrbit([](Camera *thisCam, double phi) -> Vec3d {
         thisCam->setAngle(CV_PI, -phi);
         return Vec3d(10*cos(phi), 0.0, 10*sin(phi));
     }, make_pair(0.0, 2*CV_PI), 0.0, 0.03);
-    */
+
 
     // orbit 2
-
+    /*
     cam.setOrbit([](Camera *thisCam, double theta) -> Vec3d {
         thisCam->setAngle(theta + CV_PI, 0);
         return Vec3d(5*cos(theta), 5*sin(theta), 0.0);
     }, make_pair(0.0, 2*CV_PI), 0.0, 0.01);
-
+    */
 
     while(true) {
 
