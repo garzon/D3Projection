@@ -438,32 +438,32 @@ compiler_clean:
 
 ####### Compile
 
-main.o: main.cpp scene.h \
+main.o: main.cpp camera.h \
+		scene.h \
 		isceneobject.h \
-		camera.h \
 		sphereobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 sphereobject.o: sphereobject.cpp sphereobject.h \
 		isceneobject.h \
-		camera.h
+		camera.h \
+		scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sphereobject.o sphereobject.cpp
 
 scene.o: scene.cpp scene.h \
-		isceneobject.h \
-		camera.h
+		isceneobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene.o scene.cpp
 
-camera.o: camera.cpp camera.h
+camera.o: camera.cpp camera.h \
+		scene.h \
+		isceneobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o camera.cpp
 
-isceneobject.o: isceneobject.cpp isceneobject.h \
-		camera.h
+isceneobject.o: isceneobject.cpp isceneobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isceneobject.o isceneobject.cpp
 
 planeobject.o: planeobject.cpp planeobject.h \
-		isceneobject.h \
-		camera.h
+		isceneobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o planeobject.o planeobject.cpp
 
 ####### Install

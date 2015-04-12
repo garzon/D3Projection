@@ -35,12 +35,12 @@ void Camera::setAngle(double _theta, double _phi) {
     baseX[0] = -sinTheta;
     baseX[1] = cosTheta;
     baseX[2] = 0;
-    baseX = baseX * focalLen * tan(FOVX);
+    baseX = -baseX * focalLen * tan(FOVX);
 
     baseY[0] = -cosTheta * sinPhi;
     baseY[1] = -sinTheta  * sinPhi;
     baseY[2] = cosPhi;
-    baseY = baseY * focalLen * tan(FOVY);
+    baseY = -baseY * focalLen * tan(FOVY);
 
     checkAng = true;
 }
